@@ -1,0 +1,29 @@
+{
+  "name": "js-object-util",
+  "version": "0.1.0",
+  "description": "A simple static utility class to access nested object properties. Inspired by Immutable API methods like hasIn and getIn.",
+  "main": "object_util.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dfsp-spirit/js-object-util.git"
+  },
+  "keywords": [
+    "js",
+    "object",
+    "mutable",
+    "getIn",
+    "hasIn"
+  ],
+  "author": "Tim Schaefer <ts+code@rcmd.org> (http://rcmd.org/ts/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dfsp-spirit/js-object-util/issues"
+  },
+  "homepage": "https://github.com/dfsp-spirit/js-object-util#readme",
+  "devDependencies": {
+    "jest": "^18.1.0"
+  }
+}
