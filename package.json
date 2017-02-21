@@ -1,7 +1,7 @@
 {
   "name": "js-object-util",
-  "version": "0.1.0",
-  "description": "A simple static utility class to access nested object properties. Inspired by Immutable API methods like hasIn and getIn.",
+  "version": "0.1.1",
+  "description": "A simple utility to access nested object properties including arrays. Inspired by Immutable API methods like hasIn and getIn.",
   "main": "object_util.js",
   "scripts": {
     "test": "jest"

@@ -61,6 +61,9 @@ A simple static utility class to access nested object properties. Inspired by Im
 
 ## Contributing
 
-In lieu of a formal style guide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code.
+The repo is at: https://github.com/dfsp-spirit/js-object-util
+
+Take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code, also make sure you agree with the license. Then send pull request.
+
 
 
