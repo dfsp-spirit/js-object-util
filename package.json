@@ -1,10 +1,13 @@
 {
   "name": "js-object-util",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A simple utility to access nested object properties including arrays. Inspired by Immutable API methods like hasIn and getIn.",
   "main": "object_util.js",
   "scripts": {
     "test": "jest"
+  },
+  "jest": {
+    "collectCoverage": "true"
   },
   "repository": {
     "type": "git",
@@ -24,6 +27,8 @@
   },
   "homepage": "https://github.com/dfsp-spirit/js-object-util#readme",
   "devDependencies": {
+    "coveralls": "^2.11.16",
+    "istanbul": "^0.4.5",
     "jest": "^18.1.0"
   }
 }
