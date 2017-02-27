@@ -58,6 +58,12 @@ A simple static utility class to access nested object properties. Inspired by Im
 ## Tests
 
   `npm test`
+  
+## Project status badges
+
+[![Build Status](https://travis-ci.org/dfsp-spirit/js-object-util.svg?branch=master)](https://travis-ci.org/dfsp-spirit/js-object-util)
+
+[![Coverage Status](https://coveralls.io/repos/github/dfsp-spirit/js-object-util/badge.svg?branch=master)](https://coveralls.io/github/dfsp-spirit/js-object-util?branch=master)
 
 ## Contributing
 
