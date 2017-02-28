@@ -85,12 +85,12 @@ function ObjectUtil() {
     /**
      * Checks whether a nested object key exists and is not null or undefined.
      * @param obj the object in which to check for the nested key
-     * @param tests an array of strings defining the path (of key names) to the key in question
+     * @param path_components an array of strings defining the path (of key names) to the key in question
      * @returns {boolean} whether the key exists and is neither undefined nor null
      */
-    ObjectUtil.hasDefinedAndNonNullIn = function(obj, tests) {
-        if(ObjectUtil.hasIn(obj, tests)) {
-            let value = ObjectUtil.getIn(obj, tests);
+    ObjectUtil.hasDefinedAndNonNullIn = function(obj, path_components) {
+        if(ObjectUtil.hasIn(obj, path_components)) {
+            let value = ObjectUtil.getIn(obj, path_components);
             let result = (typeof(value) !== 'undefined' && value != null);
             return result;
         }
@@ -100,10 +100,14 @@ function ObjectUtil() {
     /**
      * Retrieves the nested obj from the given one. Note that the path has to exist, Check first with hasIn if in doubt.
      * @param obj the object
-     * @param path_components the path to the nested object
+     * @param path_components the path to the nested object as an array of strings
+	 * @param alternate an alternate return value that will be used if the given path does not exist in the object
      * @returns {Object} the nested object
      */
-    ObjectUtil.getIn = function(obj, path_components) {
+    ObjectUtil.getIn = function(obj, path_components, alternate) {
+		if(!ObjectUtil.hasIn(obj, path_components)) {
+			return alternate;
+		}
         let path_component;
         for (var i = 0; i < path_components.length; i++) {
             path_component = path_components[i];

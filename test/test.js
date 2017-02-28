@@ -165,3 +165,12 @@ describe('Check fine with null values', function () {
         expect(ObjectUtil.hasIn(undefined, ['readers', 0, 'age'])).toBe(false);
     });
 });
+
+describe('Check alternate return value of getIn', function () {
+    it('properly returns the alternate value if the path does not exist in the object', function () {
+        expect(ObjectUtil.hasIn(book, ['readers', 1, 'nonexistant'])).toBe(false);
+        expect(ObjectUtil.getIn(book, ['readers', 1, 'nonexistant'], null)).toBe(null);
+		expect(ObjectUtil.getIn(book, ['readers', 1, 'nonexistant'], 53)).toBe(53);
+		expect(ObjectUtil.getIn(book, ['readers', 1, 'nonexistant'], 'sorry')).toBe('sorry');
+    });
+});
