@@ -172,5 +172,6 @@ describe('Check alternate return value of getIn', function () {
         expect(ObjectUtil.getIn(book, ['readers', 1, 'nonexistant'], null)).toBe(null);
 		expect(ObjectUtil.getIn(book, ['readers', 1, 'nonexistant'], 53)).toBe(53);
 		expect(ObjectUtil.getIn(book, ['readers', 1, 'nonexistant'], 'sorry')).toBe('sorry');
+		expect(ObjectUtil.getIn(book, ['readers', 1, 'nonexistant'])).toBe(undefined);
     });
 });
