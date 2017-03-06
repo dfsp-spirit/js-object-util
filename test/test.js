@@ -34,6 +34,11 @@ const book = {
     ]
 };
 
+const empty_book = {};
+const almost_empty_book = {
+	is_cc_licensed: true
+};
+
 describe('Check for existence of keys in objects', function () {
 
     it('properly detects existing keys', function () {
@@ -175,3 +180,148 @@ describe('Check alternate return value of getIn', function () {
 		expect(ObjectUtil.getIn(book, ['readers', 1, 'nonexistant'])).toBe(undefined);
     });
 });
+
+describe('Check createPathIn functionality', function () {
+    it('properly creates a path in an object', function () {
+		expect(ObjectUtil.hasIn(empty_book, ['publisher', 'address', 'city'])).toBe(false);
+		var new_book = ObjectUtil.addPathIn(empty_book, ['publisher', 'address', 'city'], {});
+		var expected_book = {
+			publisher: {
+				address: {
+					city: {
+					}
+				}
+			}
+		};
+        expect(ObjectUtil.hasIn(new_book, ['publisher', 'address', 'city'])).toBe(true);
+		expect(new_book).toEqual(expected_book);
+    });
+	
+	it('properly creates a path in an object and does not mess with existing paths', function () {
+		expect(ObjectUtil.hasIn(almost_empty_book, ['publisher', 'address', 'city'])).toBe(false);
+		var new_book = ObjectUtil.addPathIn(almost_empty_book, ['publisher', 'address', 'city'], {});
+		var expected_book = {
+			publisher: {
+				address: {
+					city: {
+					}
+				}
+			},
+			is_cc_licensed: true
+		};
+        expect(ObjectUtil.hasIn(new_book, ['publisher', 'address', 'city'])).toBe(true);
+		expect(new_book).toEqual(expected_book);
+    });
+	
+	it('properly handles null input objects', function () {
+
+		var new_book = ObjectUtil.addPathIn(null, ['publisher', 'address', 'city'], {});
+		var expected_book = {
+			publisher: {
+				address: {
+					city: {
+					}
+				}
+			}
+		};
+        expect(ObjectUtil.hasIn(new_book, ['publisher', 'address', 'city'])).toBe(true);
+		expect(new_book).toEqual(expected_book);
+    });
+	
+	it('properly handles undefined input objects', function () {
+
+		var new_book = ObjectUtil.addPathIn(undefined, ['publisher', 'address', 'city'], {});
+		var expected_book = {
+			publisher: {
+				address: {
+					city: {
+					}
+				}
+			}
+		};
+        expect(ObjectUtil.hasIn(new_book, ['publisher', 'address', 'city'])).toBe(true);
+		expect(new_book).toEqual(expected_book);
+    });
+	
+	it('properly handles arrays which do not exist in the input objects', function () {
+
+		var new_book = ObjectUtil.addPathIn(almost_empty_book, ['readers', 3, 'address'], {});
+		var expected_book = {
+			readers: [
+				undefined,
+				undefined,
+				undefined,
+				{
+					address: {
+					}
+				}
+			],
+			is_cc_licensed: true
+		};
+        expect(ObjectUtil.hasIn(new_book, ['readers', 3, 'address'])).toBe(true);
+		expect(new_book).toEqual(expected_book);
+    });
+	
+	it('properly handles arrays which do not exist in the input objects and uses the given value for missing elements', function () {
+
+		var new_book = ObjectUtil.addPathIn(almost_empty_book, ['readers', 3, 'address'], {}, null);
+		var expected_book = {
+			readers: [
+				null,
+				null,
+				null,
+				{
+					address: {
+					}
+				}
+			],
+			is_cc_licensed: true
+		};
+        expect(ObjectUtil.hasIn(new_book, ['readers', 3, 'address'])).toBe(true);
+		expect(new_book).toEqual(expected_book);
+    });
+	
+	it('properly handles paths which already exist', function () {
+		var new_book = ObjectUtil.addPathIn(almost_empty_book, ['is_cc_licensed'], true);
+        expect(ObjectUtil.hasIn(new_book, ['is_cc_licensed'])).toBe(true);
+		expect(new_book).toEqual(almost_empty_book);
+    });
+	
+	it('can cope with arrays at the root', function () {
+		var new_book = ObjectUtil.addPathIn(empty_book, [1, 'is_cc_licensed'], {});
+        expect(ObjectUtil.hasIn(new_book, [1, 'is_cc_licensed'])).toBe(true);
+		var expected_book = [
+			undefined,
+			{
+				is_cc_licensed: {
+				}
+			}
+		];
+		expect(new_book).toEqual(expected_book);
+    });
+	
+	it('overwrites other values with arrays if required by the new path', function () {
+		var new_book = ObjectUtil.addPathIn(almost_empty_book, ['is_cc_licensed', 1, 'age'], {});
+        expect(ObjectUtil.hasIn(new_book, ['is_cc_licensed', 1, 'age'])).toBe(true);
+		var expected_book = {
+			is_cc_licensed: [
+				undefined,
+				{
+					age: {
+					}
+				}
+			]
+		};
+		expect(new_book).toEqual(expected_book);
+    });
+	
+	it('does not erase existing array data', function () {
+		var new_book = ObjectUtil.addPathIn(book, ['readers', 2, 'age'], 14);
+		var new_book = ObjectUtil.addPathIn(book, ['readers', 2, 'sex'], 'somethinginbetween');
+		expect(ObjectUtil.getIn(new_book, ['readers', 1, 'name'])).toBe('Brad');
+		expect(ObjectUtil.getIn(new_book, ['readers', 2, 'sex'])).toBe('somethinginbetween');
+
+    });
+});
+
+
