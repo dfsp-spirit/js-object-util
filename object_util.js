@@ -80,9 +80,9 @@ ObjectUtil._stringRepresentsPositiveIntegerIncludingZero = function(str) {
 
 /**
  * Checks whether a nested object key exists and is not null or undefined.
- * @param obj the JSON object in which to check for the nested key
- * @param path_components an array of strings defining the path (of key names) to the key in question
- * @returns {boolean} whether the key exists and is neither undefined nor null
+ * @param obj The JSON object in which to check for the nested key
+ * @param path_components An array of strings defining the path (of key names) to the key in question
+ * @returns {boolean} Whether the key exists and is neither undefined nor null
  */
 ObjectUtil.hasDefinedAndNonNullIn = function(obj, path_components) {
 	if(ObjectUtil.hasIn(obj, path_components)) {
@@ -95,10 +95,10 @@ ObjectUtil.hasDefinedAndNonNullIn = function(obj, path_components) {
 
 /**
  * Retrieves the nested obj from the given one. Note that the path has to exist, Check first with hasIn if in doubt.
- * @param obj the input JSON object
- * @param path_components the path to the nested object as an array of strings
- * @param alternate an alternate return value that will be used if the given path does not exist in the object
- * @returns {Object} the nested object
+ * @param obj The input JSON object
+ * @param path_components The path to the nested object as an array of strings
+ * @param alternate An alternate return value that will be used if the given path does not exist in the object
+ * @returns {Object} The nested object
  */
 ObjectUtil.getIn = function(obj, path_components, alternate) {
 	if(!ObjectUtil.hasIn(obj, path_components)) {
@@ -119,13 +119,15 @@ ObjectUtil.getIn = function(obj, path_components, alternate) {
 
 /**
  * Creates a new object based on the old one that has the given path added.
- * @param obj the input JSON object
- * @param path_components the path to the nested object as an array of strings and/or numbers. You have to use numbers (integers >= 0 to be more precise) if you want to set array values.
- * @param value_to_use_for_leaf the value to set for the final path element
- * @param value_to_use_for_missing_array_elements a value to push into arrays to fill them to the required length, if needed. Optional, defaults to undefined.
- * @returns {Object} the new JSON object, which includes the requested path
+ * @param obj The input JSON object
+ * @param path_components The path to the nested object as an array of strings and/or numbers. Numbers are treated as array indices. 
+          If you set an array index n while n-1 does not exist, this function will push values into the array to make the index word.
+		  You can determine what will be pushed by using the last, optional parameter of this function. If you omit it, undefined will be used.
+ * @param value The target value to set for the final path element.
+ * @param value_to_use_for_missing_array_elements A value to push into arrays to fill them to the required length, if needed. Optional, defaults to undefined.
+ * @returns {Object} The new JSON object, which includes the requested path.
  **/
-ObjectUtil.addPathIn = function(obj, path_components, value_to_use_for_leaf, value_to_use_for_missing_array_elements) {
+ObjectUtil.setIn = function(obj, path_components, value, value_to_use_for_missing_array_elements) {
 	
 	var obj_cp = Object.assign({}, obj);
 	
@@ -170,7 +172,7 @@ ObjectUtil.addPathIn = function(obj, path_components, value_to_use_for_leaf, val
 				}				
 				sub_obj[path_component] = {};
 				if(i === (path_components.length - 1)) {
-					sub_obj[path_component] = value_to_use_for_leaf;
+					sub_obj[path_component] = value;
 				}
 			}
 		}
