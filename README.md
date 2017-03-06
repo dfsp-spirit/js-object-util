@@ -1,7 +1,7 @@
 js-object-util
 ===============
 
-A simple static utility class to access nested object properties. Inspired by Immutable API methods like hasIn and getIn.
+A simple static utility class to access nested JSON object properties. Inspired by Immutable API methods like hasIn and getIn.
 
 ## Installation
 
@@ -11,7 +11,7 @@ A simple static utility class to access nested object properties. Inspired by Im
 
     var objectUtil = require('js-object-util');
 	
-	// some deeply nested example input
+	// some deeply nested JSON example input
 	const book = {
 		publisher: {
 			name: "dpunkt",
@@ -45,11 +45,12 @@ A simple static utility class to access nested object properties. Inspired by Im
 	
 	// let's go
 	var keyExists;
-	keyExists = objectUtil.hasIn(book, ['publisher', 'address', 'city'];			// true
-	keyExists = objectUtil.hasIn(book, ['publisher', 'address', 'notthere'];		// false
+	keyExists = objectUtil.hasIn(book, ['publisher', 'address', 'city']);		// true
+	keyExists = objectUtil.hasIn(book, ['publisher', 'address', 'notthere']);	// false
 	var value;
-	value = ObjectUtil.getIn(book, ['year'])										// 2015
-	value = objectUtil.getIn(book, ['readers', '1', 'name']							// Brad
+	value = ObjectUtil.getIn(book, ['year']);							// 2015
+	value = objectUtil.getIn(book, ['readers', '1', 'name']);			// Brad
+	value = objectUtil.getIn(book, ['readers', '5', 'notthere'], null);			// null
       
   
     See the tests for more examples.  
