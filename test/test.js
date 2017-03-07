@@ -322,6 +322,42 @@ describe('Check setIn functionality', function () {
 		expect(ObjectUtil.getIn(new_book, ['readers', 2, 'sex'])).toBe('somethinginbetween');
 
     });
+	
+	it('sets different data types correctly in an object', function () {
+		var new_book;
+		new_book = ObjectUtil.setIn(empty_book, ['readers', 0, 'age'], 14);
+		new_book = ObjectUtil.setIn(new_book, ['readers', 0, 'name'], 'Dan');
+		new_book = ObjectUtil.setIn(new_book, ['readers', 0, 'is_illiterate'], false);
+		new_book = ObjectUtil.setIn(new_book, ['readers', 0, 'nickname'], null);
+		new_book = ObjectUtil.setIn(new_book, ['readers', 0, 'type'], 'user');
+		new_book = ObjectUtil.setIn(new_book, ['title'], 'React to what?');
+		new_book = ObjectUtil.setIn(new_book, ['year'], 2017);
+		new_book = ObjectUtil.setIn(new_book, ['publisher', 'name'], 'cpunkt');
+		new_book = ObjectUtil.setIn(new_book, ['publisher', 'address', 'city'], 'Frankfurt am Main');
+		
+		const expected_book = {
+			publisher: {
+				name: "cpunkt",
+				address: {
+					city: "Frankfurt am Main"
+				}
+			},
+			title : "React to what?",
+			year: 2017,
+			readers: [
+				{
+					type: "user",
+					name: "Dan",
+					age: 14,
+					nickname: null,
+					is_illiterate: false
+				}
+			]
+		};
+
+		
+		expect(new_book).toEqual(expected_book);
+    });
 });
 
 
