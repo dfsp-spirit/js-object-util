@@ -1,6 +1,6 @@
 {
   "name": "js-object-util",
-  "version": "0.3.4",
+  "version": "0.3.5",
   "description": "A simple utility to access nested JSON object properties, including arrays. Inspired by Immutable API methods like hasIn and getIn.",
   "main": "object_util.js",
   "scripts": {

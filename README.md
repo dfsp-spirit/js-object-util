@@ -57,7 +57,7 @@ A simple static utility class to access nested JSON object properties. Inspired 
 	value = objectUtil.getIn(book, ['readers', 1, 'name']);			// Brad
 	value = objectUtil.getIn(book, ['readers', 5, 'notthere'], null);			// null
 	// Setting properties:
-	var new_book
+	var new_book;
 	new_book = ObjectUtil.setIn(book, ['readers', 2, 'name'], 'Dan');
 	new_book = ObjectUtil.setIn(new_book, ['readers', 2, 'age'], 14);
       
