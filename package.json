@@ -28,7 +28,7 @@
   },
   "homepage": "https://github.com/dfsp-spirit/js-object-util#readme",
   "devDependencies": {
-    "coveralls": "^2.11.16",
+    "coveralls": "^3.0.0",
     "istanbul": "^0.4.5",
     "jest": "^18.1.0"
   }
