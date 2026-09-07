@@ -1,6 +1,9 @@
 js-object-util
 ===============
 
+**Ignore this**, just use Lodash or whatever.
+
+
 A simple static utility class to access nested JSON object properties. Inspired by Immutable API methods like hasIn, getIn and setIn.
 
 ## Installation
